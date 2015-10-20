@@ -6,6 +6,6 @@ var reload      = browserSync.reload;
 gulp.task('plugScripts', function() {
     return gulp.src('dev/scripts/plugins.js')
      .pipe(uglify())
-     .pipe(gulp.dest('dist/assets/scripts/'))
+     .pipe(gulp.dest('dist/assets/theme/scripts/'))
      .pipe(reload({stream:true}));
 });

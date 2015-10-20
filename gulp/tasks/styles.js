@@ -1,9 +1,13 @@
 var gulp = require('gulp');
-var browserSync = require('browser-sync');
-var reload      = browserSync.reload;
-var stylus = require('gulp-stylus');
-var jeet = require('jeet');
-var autoprefixer = require('autoprefixer-stylus');
+    browserSync = require('browser-sync');
+    reload      = browserSync.reload;
+    stylus = require('gulp-stylus');
+    jeet = require('jeet');
+    postcss = require('gulp-postcss'),
+    sourcemaps = require('gulp-sourcemaps'),
+    autoprefixer = require('autoprefixer'),
+    lost = require('lost');
+    poststylus = require('poststylus');
 
 // styles task
 gulp.task('styles',['minifyCSS'], function() {
@@ -11,9 +15,13 @@ gulp.task('styles',['minifyCSS'], function() {
       .pipe(stylus({
         'include css': true,
       	compress:true,
-        use: [autoprefixer(), jeet()]
+        use: [jeet(), poststylus([
+            'lost',
+            'autoprefixer'
+            ])
+          ]
       }))
-	   .pipe(gulp.dest('dist/assets/styles/'))
+	   .pipe(gulp.dest('dist/assets/theme/styles/'))
      .pipe(reload({stream:true}));
 
 });
